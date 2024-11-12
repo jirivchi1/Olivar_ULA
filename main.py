@@ -23,7 +23,7 @@ def main():
         upload_to_server()
 
         # Enviar datos de monitorización con los argumentos especificados
-        send_monitoring_data(
+        #send_monitoring_data(
             filename=filename,
             temp=temp,
             humid=humid,
