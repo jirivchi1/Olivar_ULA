@@ -35,11 +35,10 @@ def main():
         #     bateriaPi=bateriaPi,
         # )
 
-        # Eliminar fotos después de subirlas
-        delete_photos()
-
         # Subir archivos al servidor
         upload_to_server()
+        # Eliminar fotos después de subirlas
+        delete_photos()
 
         # Apagar el sistema
         # shutdown_system()
