@@ -37,7 +37,7 @@ def read_battery_data(ser):
                     bateriaArduino, bateriaPi = map(float, line.split(","))
 
                     # Verificar que los valores estén en el rango deseado
-                    if 2.0 <= bateriaArduino <= 12.0 and 2.0 <= bateriaPi <= 12.0:
+                    if 2.0 <= bateriaArduino <= 14.0 and 2.0 <= bateriaPi <= 14.0:
                         break  # Salir del bucle si ambos valores están en el rango
 
                 except ValueError:
