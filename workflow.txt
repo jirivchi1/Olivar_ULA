@@ -1,0 +1,15 @@
+amarillo
+arduino -------3 min------
+pi   ---30 seg (encender)----90 seg (esperar) --- 20 seg (ejecuta script)
+
+
+
+main
+arduino -------4 min------
+pi   ---30 seg (encender)----120 seg (esperar) --- 20 seg (ejecuta script)
+
+
+verde
+arduino -------3 min------
+pi   ---30 seg (encender)----90 seg (esperar) --- 20 seg (ejecuta script)
+
