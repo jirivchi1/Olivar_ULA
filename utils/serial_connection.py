@@ -1,6 +1,7 @@
 import time
 import serial
 from config import port, baud_rate
+from utils.logger import log_action  # Importa el log para registrar errores
 
 
 def connect_serial(max_retries=5):
@@ -26,26 +27,32 @@ def read_battery_data(ser):
     start_time = time.time()
     timeout = 10  # Tiempo máximo de escucha en segundos
 
-    while time.time() - start_time < timeout:
-        if ser.in_waiting > 0:  # Comprobar si hay datos disponibles
-            line = (
-                ser.readline().decode("utf-8", errors="ignore").strip()
-            )  # Leer línea desde el puerto serial
+    try:
+        while time.time() - start_time < timeout:
+            if ser.in_waiting > 0:  # Comprobar si hay datos disponibles
+                line = ser.readline().decode("utf-8", errors="ignore").strip()
 
-            try:
-                # Separar los valores de los voltajes y convertirlos en float
-                bateriaArduino, bateriaPi = map(float, line.split(","))
+                try:
+                    # Separar y convertir los valores de voltaje
+                    bateriaArduino, bateriaPi = map(float, line.split(","))
 
-                # Comprobar si ambos voltajes están en el rango deseado
-                if 2.0 <= bateriaArduino <= 12.0 and 2.0 <= bateriaPi <= 12.0:
-                    break  # Salir del bucle si ambos valores están en el rango
+                    # Verificar que los valores estén en el rango deseado
+                    if 2.0 <= bateriaArduino <= 12.0 and 2.0 <= bateriaPi <= 12.0:
+                        break  # Salir del bucle si ambos valores están en el rango
 
-            except ValueError:
-                print(f"Invalid data received: {line}")
+                except ValueError:
+                    print(f"Invalid data received: {line}")
 
-        time.sleep(0.5)
+            time.sleep(0.5)
 
-    if bateriaArduino == 0 and bateriaPi == 0:
-        raise RuntimeError("No se pudo leer datos válidos de la batería desde Arduino.")
+        if bateriaArduino == 0 and bateriaPi == 0:
+            raise RuntimeError(
+                "No se pudo leer datos válidos de la batería desde Arduino."
+            )
+
+    except Exception as e:
+        # Registrar el error en el log y devolver valores predeterminados
+        log_action(f"Error al leer datos de la batería: {e}")
+        bateriaArduino, bateriaPi = -1, -1  # Valores predeterminados en caso de error
 
     return bateriaArduino, bateriaPi

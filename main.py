@@ -22,7 +22,11 @@ def main():
         # Enviar datos de monitorización, utilizando valores predeterminados si es necesario
         if temp is None or humid is None:
             temp, humid = -1, -1  # Valores predeterminados si el sensor falló
-        
+
+        # Usar valores predeterminados si no se han leído valores válidos de la batería
+        if bateriaArduino == -1 or bateriaPi == -1:
+            log_action("Usando valores predeterminados para la batería.")
+
         # Subir archivos al servidor
         upload_to_server()
 
