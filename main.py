@@ -44,7 +44,7 @@ def main():
         log_action("2.Fotos eliminadas después de subirlas.")
 
         # Apagar el sistema
-        shutdown_system()
+        #shutdown_system()
         log_action("Sistema apagado correctamente")
 
     except Exception as e:
