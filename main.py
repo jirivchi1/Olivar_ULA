@@ -11,7 +11,6 @@ def main():
     try:
         ser = connect_serial()
         filepath, filename = take_photo()
-        log_action(f"1.Photo {filename} taken.")
 
         # Leer datos del sensor de temperatura y humedad
         temp, humid = read_sensor_data()
@@ -27,9 +26,6 @@ def main():
         if bateriaArduino == -1 or bateriaPi == -1:
             log_action("Usando valores predeterminados para la batería.")
 
-        # Subir archivos al servidor
-        upload_to_server()
-
         # Enviar datos de monitorización con los argumentos especificados
         # send_monitoring_data(
         #     filename=filename,
@@ -41,11 +37,12 @@ def main():
 
         # Eliminar fotos después de subirlas
         delete_photos()
-        log_action("2.Fotos eliminadas después de subirlas.")
+
+        # Subir archivos al servidor
+        upload_to_server()
 
         # Apagar el sistema
-        #shutdown_system()
-        log_action("Sistema apagado correctamente")
+        # shutdown_system()
 
     except Exception as e:
         log_action(f"Error en el proceso principal: {e}")

@@ -1,5 +1,8 @@
 import os
 import subprocess
+from utils.logger import log_action
+
+
 from config import (
     SERVER_USER,
     SERVER_IP,
@@ -59,5 +62,7 @@ def delete_photos():
                 os.remove(filepath)
                 print(f"Image {filename} deleted.")
         print("All images deleted.")
+        log_action("Fotos eliminadas después de subirlas.")
+
     except Exception as e:
         raise RuntimeError(f"Error al eliminar las fotos: {e}")
