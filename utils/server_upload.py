@@ -25,16 +25,6 @@ def upload_to_server():
                 )
                 print(f"Image {filename} uploaded to the server.")
 
-        # Subir datos del sensor
-        subprocess.run(
-            [
-                "scp",
-                SENSOR_DATA_FILE,
-                f"{SERVER_USER}@{SERVER_IP}:{SERVER_DIR}/datos_sensor.txt",
-            ],
-            check=True,
-        )
-        print("Sensor data uploaded to the server.")
 
         # Subir archivo de log_banda.txt
         log_file_path = os.path.join(METRICS_DIRECTORY, "log_banda.txt")
