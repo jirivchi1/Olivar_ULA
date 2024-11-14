@@ -1,7 +1,7 @@
 import time
 import serial
 from config import port, baud_rate
-from utils.logger import log_action  # Importa el log para registrar errores
+from utils.logger import log_action
 
 
 def connect_serial(max_retries=5):
@@ -21,7 +21,7 @@ def connect_serial(max_retries=5):
     return ser
 
 
-def read_battery_data(ser):
+def read_battery_data(ser, archivo):
     """Lee datos de voltaje de la batería desde Arduino."""
     bateriaArduino, bateriaPi = 0, 0
     start_time = time.time()
@@ -52,7 +52,7 @@ def read_battery_data(ser):
 
     except Exception as e:
         # Registrar el error en el log y devolver valores predeterminados
-        log_action(f"Error al leer datos de la batería: {e}")
+        log_action(f"Error al leer datos de la batería: {e}", archivo)
         bateriaArduino, bateriaPi = -1, -1  # Valores predeterminados en caso de error
 
     return bateriaArduino, bateriaPi

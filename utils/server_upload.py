@@ -16,14 +16,14 @@ from config import (
 )
 
 
-def upload_to_server_banda():
+def upload_to_server(server_dir, local_dir, archivo):
     try:
         # Subir todas las imágenes en el directorio LOCAL_DIRECTORY_BANDA
-        for filename in os.listdir(LOCAL_DIRECTORY_BANDA):
-            filepath = os.path.join(LOCAL_DIRECTORY_BANDA, filename)
+        for filename in os.listdir(local_dir):
+            filepath = os.path.join(local_dir, filename)
             if filename.endswith(".jpg"):
                 subprocess.run(
-                    ["scp", filepath, f"{SERVER_USER}@{SERVER_IP}:{SERVER_DIR_BANDA}"],
+                    ["scp", filepath, f"{SERVER_USER}@{SERVER_IP}:{server_dir}"],
                     check=True,
                 )
                 print(f"Image {filename} uploaded to the server.")
@@ -39,110 +39,22 @@ def upload_to_server_banda():
             check=True,
         )
         print("Log file uploaded to the server.")
-
         print("All images, sensor data, and log file uploaded.")
+        log_action("All images, sensor data, and log file uploaded.", archivo)
 
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"Error al subir archivos al servidor: {e}")
 
 
-def delete_photos_banda():
+def delete_photos(local_dir, archivo):
     try:
-        for filename in os.listdir(LOCAL_DIRECTORY_BANDA):
-            filepath = os.path.join(LOCAL_DIRECTORY_BANDA, filename)
+        for filename in os.listdir(local_dir):
+            filepath = os.path.join(local_dir, filename)
             if filename.endswith(".jpg"):
                 os.remove(filepath)
                 print(f"Image {filename} deleted.")
         print("All images deleted.")
-        log_action("Fotos eliminadas después de subirlas.")
-
-    except Exception as e:
-        raise RuntimeError(f"Error al eliminar las fotos: {e}")
-
-
-def upload_to_server_green():
-    try:
-        # Subir todas las imágenes en el directorio LOCAL_DIRECTORY
-        for filename in os.listdir(LOCAL_DIRECTORY_GREEN):
-            filepath = os.path.join(LOCAL_DIRECTORY_GREEN, filename)
-            if filename.endswith(".jpg"):
-                subprocess.run(
-                    ["scp", filepath, f"{SERVER_USER}@{SERVER_IP}:{SERVER_DIR_GREEN}"],
-                    check=True,
-                )
-                print(f"Image {filename} uploaded to the server.")
-
-        # Subir archivo de log_banda.txt
-        log_file_path = os.path.join(METRICS_DIRECTORY, "log_green.txt")
-        subprocess.run(
-            [
-                "scp",
-                log_file_path,
-                f"{SERVER_USER}@{SERVER_IP}:{SERVER_DIR_GREEN}/log_green.txt",
-            ],
-            check=True,
-        )
-        print("Log file uploaded to the server.")
-
-        print("All images, sensor data, and log file uploaded.")
-
-    except subprocess.CalledProcessError as e:
-        raise RuntimeError(f"Error al subir archivos al servidor: {e}")
-
-
-def delete_photos_green():
-    try:
-        for filename in os.listdir(LOCAL_DIRECTORY_GREEN):
-            filepath = os.path.join(LOCAL_DIRECTORY_GREEN, filename)
-            if filename.endswith(".jpg"):
-                os.remove(filepath)
-                print(f"Image {filename} deleted.")
-        print("All images deleted.")
-        log_action("Fotos eliminadas después de subirlas.")
-
-    except Exception as e:
-        raise RuntimeError(f"Error al eliminar las fotos: {e}")
-
-
-def upload_to_server_yellow():
-    try:
-        # Subir todas las imágenes en el directorio LOCAL_DIRECTORY
-        for filename in os.listdir(LOCAL_DIRECTORY_YELLOW):
-            filepath = os.path.join(LOCAL_DIRECTORY_YELLOW, filename)
-            if filename.endswith(".jpg"):
-                subprocess.run(
-                    ["scp", filepath, f"{SERVER_USER}@{SERVER_IP}:{SERVER_DIR_YELLOW}"],
-                    check=True,
-                )
-                print(f"Image {filename} uploaded to the server.")
-
-        # Subir archivo de log_banda.txt
-        log_file_path = os.path.join(METRICS_DIRECTORY, "log_yellow.txt")
-        subprocess.run(
-            [
-                "scp",
-                log_file_path,
-                f"{SERVER_USER}@{SERVER_IP}:{SERVER_DIR_YELLOW}/log_yellow.txt",
-            ],
-            check=True,
-        )
-        print("Log file uploaded to the server.")
-
-        print("All images, sensor data, and log file uploaded.")
-
-    except subprocess.CalledProcessError as e:
-        raise RuntimeError(f"Error al subir archivos al servidor: {e}")
-
-
-def delete_photos_yellow():
-    try:
-        for filename in os.listdir(LOCAL_DIRECTORY_YELLOW):
-            filepath = os.path.join(LOCAL_DIRECTORY_YELLOW, filename)
-            if filename.endswith(".jpg"):
-                os.remove(filepath)
-                print(f"Image {filename} deleted.")
-        print("All images deleted.")
-        log_action("Fotos eliminadas después de subirlas.")
+        log_action("Fotos eliminadas después de subirlas.", archivo)
 
     except Exception as e:
         raise RuntimeError(f"Error al eliminar las fotos: {e}")

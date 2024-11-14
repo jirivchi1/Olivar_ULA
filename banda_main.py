@@ -1,8 +1,10 @@
 from utils.serial_connection import connect_serial, read_battery_data
-from utils.camera import take_photo_banda
+from utils.camera import take_photo
 from utils.sensors import read_sensor_data
-from utils.server_upload import upload_to_server_banda, delete_photos_banda
-from utils.logger import log_action_banda
+from utils.server_upload import upload_to_server, delete_photos
+from utils.logger import log_action
+from config import LOCAL_DIRECTORY_BANDA, SERVER_DIR_BANDA
+
 from utils.monitoring import send_monitoring_data_banda
 from utils.shutdown import shutdown_system
 
@@ -10,13 +12,21 @@ from utils.shutdown import shutdown_system
 def main():
     try:
         ser = connect_serial()
-        filepath, filename = take_photo_banda()
+
+        filepath, filename = take_photo(
+            LOCAL_DIRECTORY_BANDA, "log_banda.txt", "_banda_RP06"
+        )
 
         # Leer datos del sensor de temperatura y humedad
-        temp, humid = read_sensor_data()
+        temp, humid = read_sensor_data("log_banda.txt")
 
         # Leer datos de la batería desde Arduino
-        bateriaArduino, bateriaPi = read_battery_data(ser)
+        bateriaArduino, bateriaPi = read_battery_data(ser, "log_banda.txt")
+
+        log_action(
+            f"Valores bateria Pi:{bateriaPi}, arduino: {bateriaArduino}",
+            "log_banda.txt",
+        )
 
         # Enviar datos de monitorización con los argumentos especificados
         send_monitoring_data_banda(
@@ -25,18 +35,19 @@ def main():
             humid=humid,
             bateriaArduino=bateriaArduino,
             bateriaPi=bateriaPi,
+            archivo="log_banda.txt",
         )
 
         # Subir archivos al servidor
-        upload_to_server_banda()
+        upload_to_server(SERVER_DIR_BANDA, LOCAL_DIRECTORY_BANDA, "log_banda.txt")
         # Eliminar fotos después de subirlas
-        delete_photos_banda()
+        delete_photos(LOCAL_DIRECTORY_BANDA, "log_banda.txt")
 
         # Apagar el sistema
         # shutdown_system()
 
     except Exception as e:
-        log_action_banda(f"Error en el proceso principal: {e}")
+        log_action(f"Error en el proceso principal: {e}", "log_banda.txt")
 
 
 if __name__ == "__main__":
