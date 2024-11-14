@@ -18,14 +18,6 @@ def main():
         # Leer datos de la batería desde Arduino
         bateriaArduino, bateriaPi = read_battery_data(ser)
 
-        # Enviar datos de monitorización, utilizando valores predeterminados si es necesario
-        if temp is None or humid is None:
-            temp, humid = -1, -1  # Valores predeterminados si el sensor falló
-
-        # Usar valores predeterminados si no se han leído valores válidos de la batería
-        if bateriaArduino == -1 or bateriaPi == -1:
-            log_action("Usando valores predeterminados para la batería.")
-
         # Enviar datos de monitorización con los argumentos especificados
         # send_monitoring_data(
         #     filename=filename,

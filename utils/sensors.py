@@ -15,4 +15,4 @@ def read_sensor_data():
 
     except Exception as e:
         log_action(f"Error al leer los datos del sensor: {e}")
-        return None, None  # Devuelve valores nulos o predeterminados
+        return -1, -1  # Devuelve valores nulos o predeterminados
