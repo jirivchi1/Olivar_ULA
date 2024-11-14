@@ -14,11 +14,13 @@ def main():
         # Leer datos de la batería desde Arduino
         bateriaArduino, bateriaPi = read_battery_data(ser, "log_yellow.txt")
 
+        print("log action")
         log_action(
             f"Valores bateria Pi:{bateriaPi}, arduino: {bateriaArduino}",
             "log_yellow.txt",
         )
 
+        print("entra a función hacer fto")
         filepath, filename = take_photo(
             LOCAL_DIRECTORY_YELLOW, "log_yellow.txt", "_yellow_RP04"
         )

@@ -5,6 +5,7 @@ from utils.logger import log_action
 
 
 def take_photo(local_directory, archivo, name_foto):
+    print("test para camara")
     os.makedirs(local_directory, exist_ok=True)
     filename = datetime.now().strftime("%Y%m%d_%H%M%S") + {name_foto} + ".jpg"
     filepath = f"{local_directory}/{filename}"
