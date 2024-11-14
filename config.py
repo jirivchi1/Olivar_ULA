@@ -7,11 +7,11 @@ SERVER_USER = os.getenv("SERVER_USER")
 SERVER_IP = os.getenv("SERVER_IP")
 SERVER_DIR = os.getenv("SERVER_DIR")
 LOCAL_DIRECTORY = os.getenv(
-    "LOCAL_DIRECTORY", "/home/pi/loyola_olivar/nodes/node_banda/fotos"
+    "LOCAL_DIRECTORY", "/home/pi/olivarv2/fotos"
 )
 METRICS_DIRECTORY = os.getenv("METRICS_DIRECTORY", "/home/pi")
 SENSOR_DATA_FILE = os.getenv(
-    "SENSOR_DATA_FILE", "/home/pi/loyola_olivar/nodes/node_banda/datos_sensor.txt"
+    "SENSOR_DATA_FILE", "/home/pi/datos_sensor.txt"
 )
 MONITORING_URL = os.getenv("MONITORING_URL")
 DEVICE_ID = os.getenv("DEVICE_ID")
