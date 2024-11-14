@@ -10,4 +10,5 @@ def take_photo(local_directory, archivo, name_foto):
     filepath = f"{local_directory}/{filename}"
     subprocess.run(["fswebcam", "-r", "1280x720", "--no-banner", filepath], check=True)
     log_action(f"Photo {filename} taken.", archivo)
+    print("foto hecha")
     return filepath, filename
