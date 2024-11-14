@@ -117,12 +117,12 @@ def upload_to_server_yellow():
                 print(f"Image {filename} uploaded to the server.")
 
         # Subir archivo de log_banda.txt
-        log_file_path = os.path.join(METRICS_DIRECTORY, "yellow_banda.txt")
+        log_file_path = os.path.join(METRICS_DIRECTORY, "log_yellow.txt")
         subprocess.run(
             [
                 "scp",
                 log_file_path,
-                f"{SERVER_USER}@{SERVER_IP}:{SERVER_DIR_YELLOW}/yellow_banda.txt",
+                f"{SERVER_USER}@{SERVER_IP}:{SERVER_DIR_YELLOW}/log_yellow.txt",
             ],
             check=True,
         )
