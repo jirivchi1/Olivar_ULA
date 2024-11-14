@@ -6,12 +6,6 @@ from utils.logger import log_action
 from config import (
     SERVER_USER,
     SERVER_IP,
-    SERVER_DIR_BANDA,
-    SERVER_DIR_GREEN,
-    SERVER_DIR_YELLOW,
-    LOCAL_DIRECTORY_BANDA,
-    LOCAL_DIRECTORY_GREEN,
-    LOCAL_DIRECTORY_YELLOW,
     METRICS_DIRECTORY,
 )
 
@@ -34,7 +28,7 @@ def upload_to_server(server_dir, local_dir, archivo):
             [
                 "scp",
                 log_file_path,
-                f"{SERVER_USER}@{SERVER_IP}:{SERVER_DIR_BANDA}/log_banda.txt",
+                f"{SERVER_USER}@{SERVER_IP}:{server_dir}/log_banda.txt",
             ],
             check=True,
         )
