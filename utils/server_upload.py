@@ -23,12 +23,12 @@ def upload_to_server(server_dir, local_dir, archivo):
                 print(f"Image {filename} uploaded to the server.")
 
         # Subir archivo de log_banda.txt
-        log_file_path = os.path.join(METRICS_DIRECTORY, "log_banda.txt")
+        log_file_path = os.path.join(METRICS_DIRECTORY, archivo)
         subprocess.run(
             [
                 "scp",
                 log_file_path,
-                f"{SERVER_USER}@{SERVER_IP}:{server_dir}/log_banda.txt",
+                f"{SERVER_USER}@{SERVER_IP}:{server_dir}/{archivo}",
             ],
             check=True,
         )
