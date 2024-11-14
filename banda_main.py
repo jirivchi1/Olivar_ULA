@@ -1,5 +1,5 @@
 from utils.serial_connection import connect_serial, read_battery_data
-from utils.camera import take_photo
+from utils.camera import take_photo_banda
 from utils.sensors import read_sensor_data
 from utils.server_upload import upload_to_server_banda, delete_photos_banda
 from utils.logger import log_action
@@ -10,7 +10,7 @@ from utils.shutdown import shutdown_system
 def main():
     try:
         ser = connect_serial()
-        filepath, filename = take_photo()
+        filepath, filename = take_photo_banda()
 
         # Leer datos del sensor de temperatura y humedad
         temp, humid = read_sensor_data()
