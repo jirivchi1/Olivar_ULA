@@ -38,6 +38,10 @@ def read_battery_data(ser, archivo):
 
                     # Verificar que los valores estén en el rango deseado
                     if 2.0 <= bateriaArduino <= 14.0 and 2.0 <= bateriaPi <= 14.0:
+                        log_action(
+                            f"Valores bateria Pi:{bateriaPi}, arduino: {bateriaArduino}",
+                            archivo,
+                        )
                         break  # Salir del bucle si ambos valores están en el rango
 
                 except ValueError:

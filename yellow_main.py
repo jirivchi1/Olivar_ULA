@@ -11,19 +11,12 @@ def main():
     try:
         ser = connect_serial()
 
-        # Leer datos de la batería desde Arduino
-        bateriaArduino, bateriaPi = read_battery_data(ser, "log_yellow.txt")
-
-        print("log action")
-        log_action(
-            f"Valores bateria Pi:{bateriaPi}, arduino: {bateriaArduino}",
-            "log_yellow.txt",
-        )
-
-        print("entra a función hacer fto")
         filepath, filename = take_photo(
             LOCAL_DIRECTORY_YELLOW, "log_yellow.txt", "_yellow_RP04"
         )
+
+        # Leer datos de la batería desde Arduino
+        bateriaArduino, bateriaPi = read_battery_data(ser, "log_yellow.txt")
 
         # Enviar datos de monitorización con los argumentos especificados
         send_monitoring_data_yellow(
