@@ -2,7 +2,7 @@ import os
 import subprocess
 from datetime import datetime
 from config import LOCAL_DIRECTORY_BANDA, LOCAL_DIRECTORY_YELLOW, LOCAL_DIRECTORY_GREEN
-from utils.logger import log_action
+from utils.logger import log_action_banda, log_action_green, log_action_yellow
 
 
 def take_photo_banda():
@@ -10,7 +10,7 @@ def take_photo_banda():
     filename = datetime.now().strftime("%Y%m%d_%H%M%S") + "_banda_RP06" + ".jpg"
     filepath = f"{LOCAL_DIRECTORY_BANDA}/{filename}"
     subprocess.run(["fswebcam", "-r", "1280x720", "--no-banner", filepath], check=True)
-    log_action(f"Photo {filename} taken.")
+    log_action_banda(f"Photo {filename} taken.")
 
     return filepath, filename
 
@@ -20,7 +20,7 @@ def take_photo_yellow():
     filename = datetime.now().strftime("%Y%m%d_%H%M%S") + "_banda_RP06" + ".jpg"
     filepath = f"{LOCAL_DIRECTORY_YELLOW}/{filename}"
     subprocess.run(["fswebcam", "-r", "1280x720", "--no-banner", filepath], check=True)
-    log_action(f"Photo {filename} taken.")
+    log_action_yellow(f"Photo {filename} taken.")
 
     return filepath, filename
 
@@ -30,6 +30,6 @@ def take_photo_green():
     filename = datetime.now().strftime("%Y%m%d_%H%M%S") + "_banda_RP06" + ".jpg"
     filepath = f"{LOCAL_DIRECTORY_GREEN}/{filename}"
     subprocess.run(["fswebcam", "-r", "1280x720", "--no-banner", filepath], check=True)
-    log_action(f"Photo {filename} taken.")
+    log_action_green(f"Photo {filename} taken.")
 
     return filepath, filename

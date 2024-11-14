@@ -10,7 +10,7 @@ from config import (
     DEVICE_ID_YELLOW,
     API_PASSWORD,
 )
-from utils.logger import log_action
+from utils.logger import log_action_green, log_action_banda, log_action_yellow
 
 
 def send_monitoring_data_banda(filename, temp, humid, bateriaArduino, bateriaPi):
@@ -43,7 +43,7 @@ def send_monitoring_data_banda(filename, temp, humid, bateriaArduino, bateriaPi)
 
         if response.status_code == 200:
             print("Datos de monitorización enviados correctamente.")
-            log_action("Monitorización: datos enviados correctamente.")
+            log_action_banda("Monitorización: datos enviados correctamente.")
         else:
             raise RuntimeError(
                 f"Error al enviar datos de monitorización. Código: {response.status_code}"
@@ -80,7 +80,7 @@ def send_monitoring_data_yellow(filename, bateriaArduino, bateriaPi):
 
         if response.status_code == 200:
             print("Datos de monitorización enviados correctamente.")
-            log_action("Monitorización: datos enviados correctamente.")
+            log_action_yellow("Monitorización: datos enviados correctamente.")
         else:
             raise RuntimeError(
                 f"Error al enviar datos de monitorización. Código: {response.status_code}"
@@ -122,7 +122,7 @@ def send_monitoring_data_green(filename, bateriaArduino, bateriaPi):
 
         if response.status_code == 200:
             print("Datos de monitorización enviados correctamente.")
-            log_action("Monitorización: datos enviados correctamente.")
+            log_action_green("Monitorización: datos enviados correctamente.")
         else:
             raise RuntimeError(
                 f"Error al enviar datos de monitorización. Código: {response.status_code}"
