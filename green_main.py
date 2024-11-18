@@ -15,6 +15,8 @@ def main():
         filepath, filename = take_photo(
             LOCAL_DIRECTORY_GREEN, "log_green.txt", "_verde_RP07"
         )
+        # Subir archivos al servidor
+        upload_to_server(SERVER_DIR_GREEN, LOCAL_DIRECTORY_GREEN, "log_green.txt")
 
         # Leer datos de la batería desde Arduino
         bateriaArduino, bateriaPi = read_battery_data(ser, "log_green.txt")
@@ -27,8 +29,6 @@ def main():
             archivo="log_green.txt",
         )
 
-        # Subir archivos al servidor
-        upload_to_server(SERVER_DIR_GREEN, LOCAL_DIRECTORY_GREEN, "log_green.txt")
         # Eliminar fotos después de subirlas
         delete_photos(LOCAL_DIRECTORY_GREEN, "log_green.txt")
 

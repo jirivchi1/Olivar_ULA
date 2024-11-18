@@ -15,6 +15,9 @@ def main():
             LOCAL_DIRECTORY_YELLOW, "log_yellow.txt", "_yellow_RP04"
         )
 
+        # Subir archivos al servidor
+        upload_to_server(SERVER_DIR_YELLOW, LOCAL_DIRECTORY_YELLOW, "log_yellow.txt")
+
         # Leer datos de la batería desde Arduino
         bateriaArduino, bateriaPi = read_battery_data(ser, "log_yellow.txt")
 
@@ -26,8 +29,6 @@ def main():
             archivo="log_yellow.txt",
         )
 
-        # Subir archivos al servidor
-        upload_to_server(SERVER_DIR_YELLOW, LOCAL_DIRECTORY_YELLOW, "log_yellow.txt")
         # Eliminar fotos después de subirlas
         delete_photos(LOCAL_DIRECTORY_YELLOW, "log_yellow.txt")
 

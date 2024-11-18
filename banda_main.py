@@ -17,6 +17,9 @@ def main():
             LOCAL_DIRECTORY_BANDA, "log_banda.txt", "_banda_RP06"
         )
 
+        # Subir archivos al servidor
+        upload_to_server(SERVER_DIR_BANDA, LOCAL_DIRECTORY_BANDA, "log_banda.txt")
+
         # Leer datos del sensor de temperatura y humedad
         temp, humid = read_sensor_data("log_banda.txt")
 
@@ -38,8 +41,6 @@ def main():
             archivo="log_banda.txt",
         )
 
-        # Subir archivos al servidor
-        upload_to_server(SERVER_DIR_BANDA, LOCAL_DIRECTORY_BANDA, "log_banda.txt")
         # Eliminar fotos después de subirlas
         delete_photos(LOCAL_DIRECTORY_BANDA, "log_banda.txt")
 
