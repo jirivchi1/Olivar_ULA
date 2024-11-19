@@ -1,20 +1,27 @@
 import os
+import shutil
 import subprocess
 from datetime import datetime
 from utils.logger import log_action
 
 def take_photo(local_directory, archivo, name_foto):
-    os.makedirs(local_directory, exist_ok=True)
+    os.makedirs(local_directory, exist_ok=True)  # Crear la carpeta local si no existe
+    backup_directory = "/home/pi/photos_backup"  # Definir la carpeta de respaldo
+    os.makedirs(backup_directory, exist_ok=True)  # Crear la carpeta de respaldo si no existe
+
     filename = datetime.now().strftime("%Y%m%d_%H%M%S") + name_foto + ".jpg"
     filepath = os.path.join(local_directory, filename)
-    
+    backup_filepath = os.path.join(backup_directory, filename)
+
     try:
         # Intentar tomar la foto
         subprocess.run(["fswebcam", "-r", "1280x720", "--no-banner", filepath], check=True)
         
         # Verificar si el archivo se creó
         if os.path.exists(filepath):
-            log_action(f"Photo {filename} successfully taken and saved to {filepath}.", archivo)
+            # Copiar la foto al directorio de respaldo
+            shutil.copy(filepath, backup_filepath)
+            log_action(f"Photo {filename} successfully taken and saved to {filepath}. Backup saved to {backup_filepath}.", archivo)
             return filepath, filename
         else:
             log_action(f"Photo {filename} could not be saved despite no errors.", archivo)
