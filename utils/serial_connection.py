@@ -59,4 +59,4 @@ def read_battery_data(ser, archivo):
         log_action(f"Error al leer datos de la batería: {e}", archivo)
         bateriaArduino, bateriaPi = -1, -1  # Valores predeterminados en caso de error
 
-    return bateriaArduino, bateriaPi
+    return bateriaPi, bateriaArduino
