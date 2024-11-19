@@ -1,35 +1,45 @@
-import os
-import subprocess
-from datetime import datetime
-from utils.logger import log_action
+import cv2
+import datetime
 
-
-def take_photo(local_directory, archivo, name_foto):
+def take_photo():
     try:
-        # Crear el directorio si no existe
-        os.makedirs(local_directory, exist_ok=True)
-        
-        # Crear el nombre y ruta del archivo
-        filename = datetime.now().strftime("%Y%m%d_%H%M%S") + name_foto + ".jpg"
-        filepath = f"{local_directory}/{filename}"
-        
-        # Intentar tomar la foto con fswebcam
-        subprocess.run(["fswebcam", "-r", "1280x720", "--no-banner", filepath], check=True)
-        
-        # Registrar en el log si la foto se tomó correctamente
-        log_action(f"Photo {filename} taken.", archivo)
-        return filepath, filename
+        # Intentar abrir la cámara
+        camera = cv2.VideoCapture(0)  # /dev/video0
 
-    except subprocess.CalledProcessError as e:
-        # Capturar errores relacionados con fswebcam
-        error_message = f"{datetime.now()}: Error al tomar la foto - {str(e)}"
-        log_action(error_message, archivo)
-        print(error_message)
-        return None, None
+        if not camera.isOpened():
+            raise Exception("Error: Cámara no encontrada o no disponible.")
+        
+        # Leer un frame de la cámara
+        ret, frame = camera.read()
+        if not ret:
+            raise Exception("Error: No se pudo capturar una imagen.")
+        
+        # Generar un nombre de archivo con la fecha y hora actual
+        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"{timestamp}_banda_RP06.jpg"
+        
+        # Guardar la imagen
+        cv2.imwrite(filename, frame)
+        print(f"Foto {filename} tomada.")
+        
+        # Liberar la cámara
+        camera.release()
+        
+        return filename
 
     except Exception as e:
-        # Capturar cualquier otro tipo de error
-        error_message = f"{datetime.now()}: Error inesperado - {str(e)}"
-        log_action(error_message, archivo)
+        # Manejo de errores
+        error_message = f"{datetime.datetime.now()}: {str(e)}"
         print(error_message)
-        return None, None
+        
+        # Escribir el error en un archivo de log
+        with open("log_banda.txt", "a") as log_file:
+            log_file.write(error_message + "\n")
+        return None
+
+if __name__ == "__main__":
+    photo = take_photo()
+    if photo:
+        print(f"Foto guardada como {photo}.")
+    else:
+        print("No se pudo tomar la foto.")
