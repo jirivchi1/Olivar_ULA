@@ -2,17 +2,18 @@ import os
 import subprocess
 from utils.logger import log_action
 
+# Configuración dinámica del directorio de métricas
+from config import SERVER_USER, SERVER_IP
 
-from config import (
-    SERVER_USER,
-    SERVER_IP,
-    METRICS_DIRECTORY,
-)
+# Obtener el directorio base del usuario actual dinámicamente
+HOME_DIRECTORY = os.path.expanduser("~")
+METRICS_DIRECTORY = os.path.join(HOME_DIRECTORY, "metrics")
 
 
 def upload_to_server(server_dir, local_dir, archivo):
     try:
-        # Subir todas las imágenes en el directorio LOCAL_DIRECTORY_BANDA
+        print(f"Subiendo imágenes desde {local_dir} al servidor {SERVER_IP}:{server_dir}")
+        # Subir todas las imágenes en el directorio local
         for filename in os.listdir(local_dir):
             filepath = os.path.join(local_dir, filename)
             if filename.endswith(".jpg"):
@@ -20,10 +21,11 @@ def upload_to_server(server_dir, local_dir, archivo):
                     ["scp", filepath, f"{SERVER_USER}@{SERVER_IP}:{server_dir}"],
                     check=True,
                 )
-                print(f"Image {filename} uploaded to the server.")
+                print(f"Imagen {filename} subida al servidor.")
 
-        # Subir archivo de log_banda.txt
+        # Subir archivo de log
         log_file_path = os.path.join(METRICS_DIRECTORY, archivo)
+        print(f"Subiendo archivo de log: {log_file_path}")
         subprocess.run(
             [
                 "scp",
@@ -32,9 +34,8 @@ def upload_to_server(server_dir, local_dir, archivo):
             ],
             check=True,
         )
-        print("Log file uploaded to the server.")
-        print("All images, sensor data, and log file uploaded.")
-        log_action("All images, sensor data, and log file uploaded.", archivo)
+        print("Archivo de log subido al servidor.")
+        log_action("Todas las imágenes, datos de sensores y archivo de log subidos.", archivo)
 
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"Error al subir archivos al servidor: {e}")
@@ -42,12 +43,13 @@ def upload_to_server(server_dir, local_dir, archivo):
 
 def delete_photos(local_dir, archivo):
     try:
+        print(f"Eliminando imágenes del directorio local: {local_dir}")
         for filename in os.listdir(local_dir):
             filepath = os.path.join(local_dir, filename)
             if filename.endswith(".jpg"):
                 os.remove(filepath)
-                print(f"Image {filename} deleted.")
-        print("All images deleted.")
+                print(f"Imagen {filename} eliminada.")
+        print("Todas las imágenes eliminadas.")
         log_action("Fotos eliminadas después de subirlas.", archivo)
 
     except Exception as e:
