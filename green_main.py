@@ -15,6 +15,10 @@ def main():
         filepath, filename = take_photo(
             LOCAL_DIRECTORY_GREEN, "log_green.txt", "_verde_RP07"
         )
+        
+        if filepath is None or filename is None:
+            log_action("No se pudo tomar la foto; se omitirán pasos relacionados con ella.", "log_green.txt")
+    
         # Subir archivos al servidor
         upload_to_server(SERVER_DIR_GREEN, LOCAL_DIRECTORY_GREEN, "log_green.txt")
 
