@@ -6,7 +6,10 @@ from utils.logger import log_action
 
 def take_photo(local_directory, archivo, name_foto):
     os.makedirs(local_directory, exist_ok=True)  # Crear la carpeta local si no existe
-    backup_directory = "/home/pi/photos_backup"  # Definir la carpeta de respaldo
+    
+    # Obtener el directorio base del usuario actual
+    home_directory = os.path.expanduser("~")
+    backup_directory = os.path.join(home_directory, "photos_backup")  # Directorio de respaldo dinámico
     os.makedirs(backup_directory, exist_ok=True)  # Crear la carpeta de respaldo si no existe
 
     filename = datetime.now().strftime("%Y%m%d_%H%M%S") + name_foto + ".jpg"
