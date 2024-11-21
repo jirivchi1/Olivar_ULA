@@ -2,10 +2,16 @@ from utils.serial_connection import connect_serial, read_battery_data
 from utils.camera import take_photo
 from utils.server_upload import upload_to_server, delete_photos
 from utils.logger import log_action
-from config import LOCAL_DIRECTORY_GREEN, SERVER_DIR_GREEN
+from config import SERVER_DIR_GREEN
 
 from utils.monitoring import send_monitoring_data_green
 from utils.shutdown import shutdown_system
+
+import os
+
+# Obtener el directorio base dinámicamente
+LOCAL_DIRECTORY_GREEN = os.path.join(os.path.expanduser("~"), "olivarv2", "fotos_green")
+os.makedirs(LOCAL_DIRECTORY_GREEN, exist_ok=True)
 
 
 def main():
