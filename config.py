@@ -31,6 +31,6 @@ DEVICE_ID_GREEN = os.getenv("DEVICE_ID_GREEN")
 
 # Configuración del puerto serial y reintentos de conexión con Arduino
 port = (
-    "/dev/ttyAMA0"  # Asegúrate de que este puerto coincida con el puerto de tu Arduino
+    "/dev/Serial0"  # Asegúrate de que este puerto coincida con el puerto de tu Arduino
 )
 baud_rate = 9600
