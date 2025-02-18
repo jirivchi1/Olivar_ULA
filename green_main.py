@@ -43,7 +43,7 @@ def main():
         delete_photos(LOCAL_DIRECTORY_GREEN, "log_green.txt")
 
         # Apagar el sistema
-        shutdown_system()
+        #shutdown_system()
 
     except Exception as e:
         log_action(f"Error en el proceso principal: {e}", "log_green.txt")
