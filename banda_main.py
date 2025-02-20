@@ -20,7 +20,7 @@ def main():
         ser = connect_serial()
 
         filepath, filename = take_photo(
-            LOCAL_DIRECTORY_BANDA, "log_banda.txt", "_banda_RP06"
+            LOCAL_DIRECTORY_BANDA, "log_banda.txt", "_banda"
         )
 
         # Subir archivos al servidor
