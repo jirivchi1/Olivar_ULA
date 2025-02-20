@@ -19,7 +19,7 @@ def main():
         ser = connect_serial()
 
         filepath, filename = take_photo(
-            LOCAL_DIRECTORY_GREEN, "log_green.txt", "_verde_RP07"
+            LOCAL_DIRECTORY_GREEN, "log_green.txt", "_verde_1"
         )
         
         if filepath is None or filename is None:
