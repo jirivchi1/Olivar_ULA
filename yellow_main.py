@@ -16,7 +16,7 @@ def main():
         ser = connect_serial()
 
         filepath, filename = take_photo(
-            LOCAL_DIRECTORY_YELLOW, "log_yellow.txt", "_yellow_RP04"
+            LOCAL_DIRECTORY_YELLOW, "log_yellow.txt", "_amarillo"
         )
 
         # Subir archivos al servidor
