@@ -18,7 +18,7 @@ def take_photo(local_directory, archivo, name_foto):
 
     try:
         # Intentar tomar la foto
-        subprocess.run(["libcamera-jpeg", "-o", filepath, "--width","3280","--height","2464"], check=True)
+        subprocess.run(["libcamera-jpeg","--nopreview", "-o", filepath, "--width","3280","--height","2464"], check=True)
         
         # Verificar si el archivo se creó
         if os.path.exists(filepath):
