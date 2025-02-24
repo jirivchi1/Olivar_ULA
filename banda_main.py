@@ -51,7 +51,7 @@ def main():
         delete_photos(LOCAL_DIRECTORY_BANDA, "log_banda.txt")
 
         # Apagar el sistema
-        # shutdown_system()
+        shutdown_system()
 
     except Exception as e:
         log_action(f"Error en el proceso principal: {e}", "log_banda.txt")
