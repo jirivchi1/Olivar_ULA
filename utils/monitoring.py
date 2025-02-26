@@ -8,7 +8,7 @@ from config import (
     DEVICE_ID_BANDA,
     DEVICE_ID_GREEN,
     DEVICE_ID_YELLOW,
-    DEVICE_ID_GREEN_2
+    DEVICE_ID_GREEN_2,
     API_PASSWORD,
 )
 from utils.logger import log_action
