@@ -32,7 +32,7 @@ def main():
         bateriaArduino, bateriaPi = read_battery_data(ser, "log_green_2.txt")
 
         # Enviar datos de monitorización con los argumentos especificados
-        send_monitoring_data_green(
+        send_monitoring_data_green_2(
             filename=filename,
             bateriaArduino=bateriaArduino,
             bateriaPi=bateriaPi,
