@@ -14,10 +14,10 @@ def take_photo(local_directory, archivo, name_foto):
 
    # Obtener fecha y hora actuales con milisegundos
     now = datetime.now()
-    timestamp = now.strftime("%Y%m%d_%H%M%S") + f"_{now.microsecond//1000:03d}" + name_foto + ".jpg"
+    filename = now.strftime("%Y%m%d_%H%M%S") + f"_{now.microsecond//1000:03d}" + name_foto + ".jpg"
     
-    filepath = os.path.join(local_directory, timestamp)
-    backup_filepath = os.path.join(backup_directory, timestamp)
+    filepath = os.path.join(local_directory, filename)
+    backup_filepath = os.path.join(backup_directory, filename)
 
     try:
         # Intentar tomar la foto
