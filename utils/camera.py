@@ -12,9 +12,12 @@ def take_photo(local_directory, archivo, name_foto):
     backup_directory = os.path.join(home_directory, "photos_backup")  # Directorio de respaldo dinámico
     os.makedirs(backup_directory, exist_ok=True)  # Crear la carpeta de respaldo si no existe
 
-    filename = datetime.now().strftime("%Y%m%d_%H%M%S") + name_foto + ".jpg"
-    filepath = os.path.join(local_directory, filename)
-    backup_filepath = os.path.join(backup_directory, filename)
+   # Obtener fecha y hora actuales con milisegundos
+    now = datetime.now()
+    timestamp = now.strftime("%Y%m%d_%H%M%S") + f"_{now.microsecond//1000:03d}" + name_foto + ".jpg"
+    
+    filepath = os.path.join(local_directory, timestamp)
+    backup_filepath = os.path.join(backup_directory, timestamp)
 
     try:
         # Intentar tomar la foto
