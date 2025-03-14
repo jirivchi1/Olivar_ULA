@@ -110,7 +110,7 @@ def send_monitoring_data_green(filename, bateriaArduino, bateriaPi, archivo):
         segundos = extract_time_from_filename(filename, archivo)
 
         infrared_count = None
-        valor_infrarrojo = infrared_count if infrared_count is not None else 1
+        valor_infrarrojo = infrared_count if infrared_count is not None else 0
 
         data = {
             "name": "irivera",
@@ -149,7 +149,7 @@ def send_monitoring_data_green_2(filename, bateriaArduino, bateriaPi, archivo):
         segundos = extract_time_from_filename(filename, archivo)
 
         infrared_count = None
-        valor_infrarrojo = infrared_count if infrared_count is not None else 1
+        valor_infrarrojo = infrared_count if infrared_count is not None else 0
 
         data = {
             "name": "irivera",
